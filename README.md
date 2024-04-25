@@ -428,6 +428,16 @@ I think this is medium. As the following language fits the impact the best.
 > V. How to identify a medium issue:
  Breaks core contract functionality, rendering the contract useless or leading to loss of funds.
 
+**sherlock-admin4**
+
+The protocol team fixed this issue in the following PRs/commits:
+https://github.com/inedibleX/goat-trading/pull/5
+
+
+**sherlock-admin4**
+
+The Lead Senior Watson signed off on the fix.
+
 # Issue M-1: Some unusual problems arise in the use of the `GoatV1Factory.sol#createPair()` function. 
 
 Source: https://github.com/sherlock-audit/2024-03-goat-trading-judging/issues/18 
@@ -944,6 +954,16 @@ Definite loss of funds without (extensive) limitations of external conditions.
 
 Also, when creating any pool, the core functionality of the protocol is damaged due to front running attacks, and as a result, initial LPs always pay more funds, so this is always a loss from the LP's perspective. Therefore, this issue meets the above high condition.
 
+**sherlock-admin4**
+
+The protocol team fixed this issue in the following PRs/commits:
+https://github.com/inedibleX/goat-trading/pull/9
+
+
+**sherlock-admin4**
+
+The Lead Senior Watson signed off on the fix.
+
 # Issue M-2: No check for `initialEth` in `GoatV1Pair.takeOverPool()`. 
 
 Source: https://github.com/sherlock-audit/2024-03-goat-trading-judging/issues/43 
@@ -1132,6 +1152,16 @@ Escalations have been resolved successfully!
 Escalation status:
 - [zzykxx](https://github.com/sherlock-audit/2024-03-goat-trading-judging/issues/43/#issuecomment-2041378803): rejected
 
+**sherlock-admin4**
+
+The protocol team fixed this issue in the following PRs/commits:
+https://github.com/inedibleX/goat-trading/pull/6
+
+
+**sherlock-admin4**
+
+The Lead Senior Watson signed off on the fix.
+
 # Issue M-3: Legitimate pools can be taken over and the penalty is not fair. 
 
 Source: https://github.com/sherlock-audit/2024-03-goat-trading-judging/issues/46 
@@ -1267,6 +1297,16 @@ I think that the mechanism for identifying should be improved.
 
 I think that this issue should be high severity. Any legitimate pools can be overtaken, which leads to fund loss of the owner of the pair. So, not only likelihood is high, but also the impact is loss of fund. I can understand why this issue was judged as medium severity.
 
+**sherlock-admin4**
+
+The protocol team fixed this issue in the following PRs/commits:
+https://github.com/inedibleX/goat-trading/pull/9
+
+
+**sherlock-admin4**
+
+The Lead Senior Watson signed off on the fix.
+
 # Issue M-4: The router is not compatible with fee on transfers tokens 
 
 Source: https://github.com/sherlock-audit/2024-03-goat-trading-judging/issues/67 
@@ -1346,6 +1386,25 @@ The problem is on the router. And https://github.com/sherlock-audit/2024-03-goat
 
 Also, https://github.com/sherlock-audit/2024-03-goat-trading-judging/issues/3 is wrong
 
+**sherlock-admin4**
+
+The protocol team fixed this issue in the following PRs/commits:
+https://github.com/inedibleX/goat-trading/pull/7
+
+
+**zzykxx**
+
+Looks good, the following functions have been added to the `GoatRouterV1` contract in order to support fee on transfer tokens:
+- `removeLiquidityETHSupportingFeeOnTransferTokens()`
+- `swapExactTokensForTokensSupportingFeeOnTransferTokens()`
+- `swapExactWethForTokensSupportingFeeOnTransferTokens()`
+- `swapETHForExactTokensSupportingFeeOnTransferTokens()`
+- `swapExactTokensForWethSupportingFeeOnTransferTokens()`
+
+**sherlock-admin4**
+
+The Lead Senior Watson signed off on the fix.
+
 # Issue M-5: It's possible to create pairs that cannot be taken over 
 
 Source: https://github.com/sherlock-audit/2024-03-goat-trading-judging/issues/69 
@@ -1392,6 +1451,31 @@ Manual Review
 
 Validate a pair initial parameters and mint liquidity on pool creation.
 
+
+
+## Discussion
+
+**sherlock-admin4**
+
+The protocol team fixed this issue in the following PRs/commits:
+https://github.com/inedibleX/goat-trading/pull/10
+
+
+**zzykxx**
+
+Looks good, fixes regarding #18, #46, #43, and #69 all involved changes at the `takeOverPool()` function, summarizing here for all of the issues:
+
+- The penalty has been removed
+- `takeOverPool()` now correctly handles the scenario of a pool having 0 liquidity
+- The new `initialEth` parameter is now being correctly checked against the old one
+- The new `virtualEth` parameter is now being correctly checked against the old one
+- The minimum amount of extra tokens required to take over the pool has been increased from 10% to 30%
+
+
+**sherlock-admin4**
+
+The Lead Senior Watson signed off on the fix.
+
 # Issue M-6: Initial Liquidity provider can bypass the withdrawal limit 
 
 Source: https://github.com/sherlock-audit/2024-03-goat-trading-judging/issues/94 
@@ -1431,4 +1515,18 @@ https://github.com/sherlock-audit/2024-03-goat-trading/blob/beb09519ad0c0ec0fdf5
 ## Tool used
 
 Manual Review
+
+
+
+## Discussion
+
+**sherlock-admin4**
+
+The protocol team fixed this issue in the following PRs/commits:
+https://github.com/inedibleX/goat-trading/pull/8
+
+
+**sherlock-admin4**
+
+The Lead Senior Watson signed off on the fix.
 
